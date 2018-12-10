@@ -1,0 +1,20 @@
+[‎20/‎04/‎2018 11:46 a.m.] Diego Davila: 
+xcopy ".\HF" %progfiles% /e /y 
+[‎20/‎04/‎2018 11:48 a.m.] Diego Davila: 
+IF %PROCESSOR_ARCHITECTURE% == x86 ( 
+    echo x86 Architecture Patch
+    set progfiles="C:\Program Files\NICE Systems\Real-Time Client\*"
+    goto :x86    
+)
+
+IF  %PROCESSOR_ARCHITECTURE% == x64  (
+    echo x64 Architecture Patch
+    set progfiles="C:\Program Files (x86)\NICE Systems\Real-Time Client\*"
+    goto :x64   
+)
+
+IF  %PROCESSOR_ARCHITECTURE% == AMD64  (
+    echo x64 Architecture Patch
+    set progfiles="C:\Program Files (x86)\NICE Systems\Real-Time Client\*"
+    goto :x64   
+) 

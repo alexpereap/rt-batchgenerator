@@ -1,0 +1,4 @@
+:hotfixes
+echo Applying Hotfixes...
+
+goto :ApplyHotfixes

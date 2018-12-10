@@ -1,0 +1,9 @@
+echo Starting RT Client silent install...
+:Install
+set msi={msi}
+set log=log\NICE Real-Time Client %datetime%.log
+echo Installing %msi%...
+msiexec /i "%msi%" /qn /passive {properties} /l*v "%log%"
+find "Installation operation completed successfully." "%log%" >null
+if not {%errorlevel%}=={0} goto :error
+echo RTClient Installation Complete!

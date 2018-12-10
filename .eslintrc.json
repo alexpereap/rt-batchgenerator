@@ -1,0 +1,26 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "prettier",
+    "airbnb"
+  ],
+  "env" : {
+      "es6"     : true,
+      "browser" : true
+  },
+  "globals":{
+    "API_URL" : true
+  },
+  "rules":{
+    "react/jsx-filename-extension" : 0,
+    "react/forbid-prop-types" : 0,
+    "react/destructuring-assignment" : 0,
+    "jsx-a11y/click-events-have-key-events" : 0,
+    "jsx-a11y/no-noninteractive-element-interactions": 0,
+    "arrow-parens" : 0,
+    "camelcase" : 0,
+    "jsx-a11y/label-has-associated-control" : 0,
+    "jsx-a11y/label-has-for" : 0,
+    "no-plusplus" : 0
+  }
+}

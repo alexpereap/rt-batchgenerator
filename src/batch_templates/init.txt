@@ -1,0 +1,9 @@
+@echo off
+setlocal
+echo.
+
+:startInstallation
+rem Start installation from this point -->
+if not exist log md log
+for /f "tokens=1-8 delims=/:. " %%a in ('echo %date% %time%') do set datetime=%%d%%b%%c_%%e%%f%%g
+

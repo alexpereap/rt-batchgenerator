@@ -1,0 +1,6 @@
+echo Installing ITI Bridge ...
+set msi={msi}
+set log=log\NICE Insight to Impact Bridge  %datetime%.log
+echo Installing %msi%...
+msiexec /i "%msi%"  /qn /passive {properties}
+echo ITI Bridge Installation Complete!

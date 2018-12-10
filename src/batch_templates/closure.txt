@@ -1,0 +1,19 @@
+:success
+echo Finished install!
+endlocal
+echo. 
+echo Complete!
+echo.
+echo Window will close in 10 seconds...
+ping -n 11 localhost >nul 2>&1
+goto :eof
+
+:error
+echo.
+echo Error detected!
+echo.
+echo Log file = %log%
+echo.
+echo Window will close in 10 seconds...
+ping -n 11 localhost >nul 2>&1
+endlocal

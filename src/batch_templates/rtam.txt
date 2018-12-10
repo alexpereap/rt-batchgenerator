@@ -1,0 +1,6 @@
+echo Installing  RTAM Upgrade...
+set msi={msi}
+set log=log\NICE RTAM Upgrade %datetime%.log
+echo Installing %msi%...
+msiexec /i "%msi%"  /qn /passive {properties}
+echo RTAM Upgrade Installation Complete!

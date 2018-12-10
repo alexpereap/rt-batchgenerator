@@ -1,0 +1,30 @@
+/* App.css */
+.extra-component-wrapper label{
+  float:left;
+}
+
+.extra-component-wrapper input[type=text]{
+  /* float:left;*/
+  width: 94%;
+}
+
+.w-70{
+  width:70%;
+}
+
+.w-10{
+  width:10%;
+}
+
+.properties-form table td, .properties-form table th{
+  word-wrap: break-word;
+}
+
+#batchScript{
+  border: 2px solid #CCC;
+  padding: 16px;
+}
+
+button{
+  cursor: pointer;
+}

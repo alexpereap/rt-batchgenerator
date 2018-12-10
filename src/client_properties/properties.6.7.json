@@ -1,0 +1,1459 @@
+{
+    "Designer" : [
+        {
+            "property"    : "EG_VCRE",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : ["1"],
+            "description" : "Indicates whether or not to install vcredist_x86.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : "1"
+            }
+        },
+        {
+            "property"    : "EGAPPDATAFOLDER",
+            "values"      : ["Text string"],
+            "default"     : ["%appdata%"],
+            "description" : "Path to custom APPDATA Folder.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "%appdata%"
+            }
+        },
+        {
+            "property"    : "EGAUTOUPDATE",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : ["no value"],
+            "description" : "Indicates whether or not to activate automatic updates.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGCACRM",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Java connector for Amdocs CRM.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCCTIT",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Java connector for CTI Tool Bar.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCHROME",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Chrome connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCJAVA",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Generic Java connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCMSCOMCTRL",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Win32 MS Common Controls and VB extension.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCNET",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the .NET connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCOFFICE",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Microsoft Office connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCONTEXT",
+            "values"      : ["Text string"],
+            "default"     : [""],
+            "description" : "Context",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGCORACLEF",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Java connector for Oracle Forms.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCOS",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Operating System connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCPB",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Power Builder connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCREATENATIVEIMAGE",
+            "values"      : ["True / false"],
+            "default"     : "False",
+            "description" : "Create native image",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "false"
+            }
+        },
+        {
+            "property"    : "EGCS6",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Siebel 6 connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCSAP",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Win32 SAP extension.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCSAPCONNECTOR",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the SAP connector",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCDELPHI",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Win32 Delphi extension",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCRIGHTNOW",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the WPF RightNow extension. For WPF RightNow, both EGWPF and EGCRIGHTNOW properties should have the value 3 selected.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCTERMINAL",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the SAP connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGDEFAULTP",
+            "values"      : ["Text string"],
+            "default"     : ["no value"],
+            "description" : "Default solution to load",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGDESKTOPICON",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Indicates whether or not to create a desktop shortcut for the Real-Time Client.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "EGFIREFOX",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not the Firefox connector is installed.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGFLEX",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Adobe Flex connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGFQDN",
+            "values"      : ["True / false"],
+            "default"     : "False",
+            "description" : "Indicates whether or not the Real-Time Client should use FQDN.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "false"
+            }
+        },
+        {
+            "property"    : "EGINSTALLJAVA",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Install java connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGLICENSE",
+            "values"      : ["Text string"],
+            "default"     : ["no value"],
+            "description" : "The license key.",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGLOUD",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Silent / GUI installation.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "EGPW",
+            "values"      : ["Text string"],
+            "default"     : ["anonymous"],
+            "description" : "The User password.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "anonymous"
+            }
+        },
+        {
+            "property"    : "EGSERVERHTTPS",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : [""],
+            "description" : "Selection of HTTP or HTTPS in GUI/silent installation.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGSERVERIP",
+            "values"      : ["FQDN"],
+            "default"     : ["hostname.domain"],
+            "description" : "RTPO server full qualified domain name.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "hostname.domain"
+            }
+        },
+        {
+            "property"    : "EGSERVERPORT",
+            "values"      : ["Number"],
+            "default"     : ["For HTTP, the default is 1911.", "For HTTPS, the default is 1912." ],
+            "description" : "RTPO Server port number.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "1911"
+            }
+        },
+        {
+            "property"    : "EGSIEBEL",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Siebel connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            } 
+        },
+        {
+            "property"    : "EGSTARTMENUICON",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Indicates whether or not to create a Start menu icon for the Real-Time Client.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "EGUSERNAME",
+            "values"      : ["Text string"],
+            "default"     : ["anonymous"],
+            "description" : "The User name.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "anonymous"
+            }
+        },
+        {
+            "property"    : "EGUSEWINAUTH",
+            "values"      : ["Yes / No"],
+            "default"     : ["Yes"],
+            "description" : "Use windows authentication.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Yes": "yes"},{"No":"no"}],
+                "default" : "yes"
+            }
+        },
+        {
+            "property"    : "EGWFMACDID",
+            "values"      : ["Text string"],
+            "default"     : ["1"],
+            "description" : "Indicates the WFM ACD ID",
+            "control"     : {
+                "type"    : "text",
+                "default" : "1"
+            }
+        },
+        {
+            "property"    : "EGWPF",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the WPF connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            } 
+        },
+        {
+            "property"    : "EGWRITETOAPPDATA",
+            "values"      : ["1 or 0"],
+            "default"     : "0",
+            "description" : "When set to 1 or omitted, indicates that write settings are to the Application Data folder. When set to 0, write settings are not to the Application Data folder.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"0": "0"},{"1":"1"}],
+                "default" : "0"
+            }
+        },
+        {
+            "property"    : "INSTALLDIR",
+            "values"      : ["Directory path"],
+            "default"     : "%Program Files (x86)%\\NICE Systems\\Real-Time Designer",
+            "description" : "Installation directory",
+            "control"     : {
+                "type"    : "text",
+                "default" : "%Program Files (x86)%\\NICE Systems\\Real-Time Designer"
+            }
+        },
+        {
+            "property"    : "SHOWERRORDIALOG",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Show the error dialog",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "STANDALONE",
+            "values"      : ["1 or 0"],
+            "default"     : "0",
+            "description" : "When set to 1, the Client and Designer work without a server in standalone mode.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"0": "0"},{"1":"1"}],
+                "default" : "0"
+            }
+        }
+
+    ],
+    "Client"   : [
+        {
+            "property"    : "ACTIVE_INSTANCE",
+            "values"      : ["True / false"],
+            "default"     : "False",
+            "description" : "Used for screen connectivity general configuration",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "false"
+            }
+            
+        },
+        {
+            "property"    : "BUSINESSUSERNAME",
+            "values"      : ["Text string"],
+            "default"     : ["When EGUSEWIN AUTH value is set to No, the default path is: RTRA\\RTClient1",
+                             "When EGUSEWIN AUTH value is set to Yes, the default path is: RTRA RTClient username"],
+            "description" : "Indicates the Robotic Automation Client user name",
+            "control"     : {
+                "type"    : "text",
+                "default" : "RTRA\\RTRARTClientusername"
+            }
+        },
+        {
+            "property"    : "DOMAIN",
+            "values"      : ["Text string"],
+            "default"     : ["No value"],
+            "description" : "Domain name to be used for Server authentication",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EG_VCRE",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : ["1"],
+            "description" : "Indicates whether or not to install vcredist_x86.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : "1"
+            }
+        },
+        {
+            "property"    : "EGAPPDATAFOLDER",
+            "values"      : ["Text string"],
+            "default"     : ["%appdata%"],
+            "description" : "Path to custom APPDATA Folder.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "%appdata%"
+            }
+        },
+        {
+            "property"    : "EGAUTOUPDATE",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : ["no value"],
+            "description" : "Indicates whether or not to activate automatic updates.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGC2C",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : "no value",
+            "description" : "When set to 1, indicates that the application usage module should work in Citrix server mode.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : ""
+            }
+            
+        },
+        {
+            "property"    : "EGCACRM",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Java connector for Amdocs CRM.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCCTIT",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Java connector for CTI Tool Bar.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCHROME",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Chrome connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCJAVA",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Generic Java connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCMSCOMCTRL",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Win32 MS Common Controls and VB extension.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCNET",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the .NET connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCOFFICE",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Microsoft Office connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCONTEXT",
+            "values"      : ["Text string"],
+            "default"     : [""],
+            "description" : "Context",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGCORACLEF",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Java connector for Oracle Forms.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCOS",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Operating System connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCPB",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Power Builder connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCREATENATIVEIMAGE",
+            "values"      : ["True / false"],
+            "default"     : "False",
+            "description" : "Create native image",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "false"
+            }
+        },
+        {
+            "property"    : "EGCS6",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Siebel 6 connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCSAP",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Win32 SAP extension.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCSAPCONNECTOR",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the SAP connector",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCDELPHI",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Win32 Delphi extension",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCRIGHTNOW",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the WPF RightNow extension. For WPF RightNow, both EGWPF and EGCRIGHTNOW properties should have the value 3 selected.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCTERMINAL",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the SAP connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGCTRLROOM",
+            "values"      : ["True / false"],
+            "default"     : "TRUE",
+            "description" : "For Robotic Automation, set to False (Client Control Room is disabled). For regular/human clients, set to True (Client Control Room is enabled).",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "EGDEFAULTP",
+            "values"      : ["Text string"],
+            "default"     : ["no value"],
+            "description" : "Default solution to load",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGDESKTOPICON",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Indicates whether or not to create a desktop shortcut for the Real-Time Client.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "EGFIREFOX",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not the Firefox connector is installed.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGFLEX",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Adobe Flex connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGFQDN",
+            "values"      : ["True / false"],
+            "default"     : "False",
+            "description" : "Indicates whether or not the Real-Time Client should use FQDN.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "false"
+            }
+        },
+        {
+            "property"    : "EGINSTALLJAVA",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Install java connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+        },
+        {
+            "property"    : "EGLICENSE",
+            "values"      : ["Text string"],
+            "default"     : ["no value"],
+            "description" : "The license key.",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGLOUD",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Silent / GUI installation.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "EGPW",
+            "values"      : ["Text string"],
+            "default"     : ["anonymous"],
+            "description" : "The User password.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "anonymous"
+            }
+        },
+        {
+            "property"    : "EGRTRAPORT",
+            "values"      : ["Number"],
+            "default"     : ["1414"],
+            "description" : "Indicates the Robotic Automation Server port.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "1414"
+            }
+        },
+        {
+            "property"    : "EGRTRASERVER",
+            "values"      : ["FQDN"],
+            "default"     : ["hostname.domain"],
+            "description" : "Indicates the Robotic Automation Server fully qualified domain name.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "hostname.domain"
+            }
+        },
+        {
+            "property"    : "EGRTRASYSLOG",
+            "values"      : ["FQDN"],
+            "default"     : ["hostname.domain"],
+            "description" : "Indicates the Robotic Automation syslog fully qualified domain name.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "hostname.domain"
+            }
+        },
+        {
+            "property"    : "EGRTRATIMEOUT",
+            "values"      : ["Number"],
+            "default"     : ["600000"],
+            "description" : "Indicates the Robotic Automation Client conversation timeout in milliseconds.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "600000"
+            }
+        },
+        {
+            "property"    : "EGRTRA",
+            "values"      : ["Yes / No"],
+            "default"     : "No", "description" : "Indicates how the Client should act in Robotic Automation mode. If you select Yes, then on startup, this will force activate autoupdate & RTI Launcher.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Yes": "yes"},{"No":"no"}],
+                "default" : "no"
+            }
+        },
+        {
+            "property"    : "EGRUNONSTARTUP",
+            "values"      : ["startup / watchdog / false"],
+            "default"     : "watchdog",
+            "description" : "Indicates whether or not the RTI Launcher is active on client startup.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"startup": "startup"},{"watchdog":"watchdog"},{"false":"false"}],
+                "default" : "watchdog"
+            }
+        },
+        {
+            "property"    : "EGSERVERHTTPS",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : [""],
+            "description" : "Selection of HTTP or HTTPS in GUI/silent installation.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGSERVERIP",
+            "values"      : ["FQDN"],
+            "default"     : ["hostname.domain"],
+            "description" : "RTPO server full qualified domain name.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "hostname.domain"
+            }
+        },
+        {
+            "property"    : "EGSERVERPORT",
+            "values"      : ["Number"],
+            "default"     : ["For HTTP, the default is 1911.", "For HTTPS, the default is 1912." ],
+            "description" : "RTPO Server port number.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "1911"
+            }
+        },
+        {
+            "property"    : "EGSHOWSYSTRAYICON",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : [""],
+            "description" : "Show Client icon in System Tray",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : "1"
+            }
+        },
+        {
+            "property"    : "EGSIEBEL",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the Siebel connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }   
+        },
+        {
+            "property"    : "EGSTARTMENUICON",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Indicates whether or not to create a Start menu icon for the Real-Time Client.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "EGUSERNAME",
+            "values"      : ["Text string"],
+            "default"     : ["anonymous"],
+            "description" : "The User name.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "anonymous"
+            }
+        },
+        {
+            "property"    : "EGUSEWINAUTH",
+            "values"      : ["Yes / No"],
+            "default"     : ["Yes"],
+            "description" : "Use windows authentication.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Yes": "yes"},{"No":"no"}],
+                "default" : "yes"
+            }
+        },
+        {
+            "property"    : "EGWFMACDID",
+            "values"      : ["Text string"],
+            "default"     : ["1"],
+            "description" : "Indicates the WFM ACD ID",
+            "control"     : {
+                "type"    : "text",
+                "default" : "1"
+            }
+        },
+        {
+            "property"    : "EGWFMMSGTHROTTLE",
+            "values"      : ["Text string"],
+            "default"     : ["1"],
+            "description" : "Indicates how often the Real-Time Client sends the last event for the Process, Agent and Application states after a change occurs. If no change has occurred, no notification is sent",
+            "control"     : {
+                "type"    : "text",
+                "default" : "1"
+            }
+        },
+        {
+            "property"    : "EGWPF",
+            "values"      : ["2 = Not installed.","3 (or no value) = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install the WPF connector.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            } 
+        },
+        {
+            "property"    : "EGWRITETOAPPDATARTRA",
+            "values"      : ["0 or 1"],
+            "default"     : "1",
+            "description" : "When set to 1 or omitted, indicates that write settings are to the Application Data folder. When set to 0, write settings are not to the Robotic Automation Application Data folder.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"0": "0"},{"1":"1"}],
+                "default" : "1"
+            }
+        },
+        {
+            "property"    : "EGWRITETOAPPDATA",
+            "values"      : ["1 or 0"],
+            "default"     : "0",
+            "description" : "When set to 1 or omitted, indicates that write settings are to the Application Data folder. When set to 0, write settings are not to the Application Data folder.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"0": "0"},{"1":"1"}],
+                "default" : "0"
+            }
+        },
+        {
+            "property"    : "INSTALLDIR",
+            "values"      : ["Directory path"],
+            "default"     : "%Program Files (x86)%\\NICE Systems\\Real-Time Client",
+            "description" : "Installation directory",
+            "control"     : {
+                "type"    : "text",
+                "default" : "%Program Files (x86)%\\NICE Systems\\Real-Time Client"
+            }
+        },
+        {
+            "property"    : "SAME_PROCESS",
+            "values"      : ["True / false"],
+            "default"     : "false",
+            "description" : "Used for screen connectivity general configuration.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "false"
+            }
+        },
+        {
+            "property"    : "SHOWERRORDIALOG",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Show the error dialog",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "SOAPListenerEnabled",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Enable or disable the Real-Time Client API.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "SOAPLISTENERMAXPORT",
+            "values"      : ["number between 1024-65535"],
+            "default"     : "41414",
+            "description" : "Defines the Real- Time Client API highest port number in the available port range.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "41414"
+            }
+        },
+        {
+            "property"    : "SOAPLISTENERMINPORT",
+            "values"      : ["number between 1024-65535"],
+            "default"     : "41414",
+            "description" : "Defines the Real-Time Client API lowest port number in the available port range.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "41414"
+            }
+        },
+        {
+            "property"    : "SOAPListenerPort",
+            "values"      : ["number between 1024-65535"],
+            "default"     : "8080",
+            "description" : "The Real-Time Client API port number.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "8080"
+            }
+        },
+        {
+            "property"    : "SOAPLISTENERRESOLUTIONMETHOD",
+            "values"      : ["WindowsUsernameOnly","WindowsUsernameWithDomain","WindowsUsernameWithFQDN","MachineNameWithSessionId"],
+            "default"     : "WindowsUsernameOnly",
+            "description" : "Defines the Real-Time Client API unique identifier to be used. WindowsUsernameOnly Example: johns WindowsUsernameWithDomain Example: nice_ systems\\johns WindowsUsernameWithFQDN Example: nice.com\\johnsMachineNameWithSessionId Example:<machine_name>.<session_id>",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"WindowsUsernameOnly": "WindowsUsernameOnly"},{"WindowsUsernameWithDomain":"WindowsUsernameWithDomain"},{"WindowsUsernameWithFQDN":"WindowsUsernameWithFQDN"},{"MachineNameWithSessionId":"MachineNameWithSessionId"}],
+                "default" : "WindowsUsernameOnly"
+            }
+        },
+        {
+            "property"    : "SOAPLISTENERUSESHAREDRESOURCESMODE",
+            "values"      : ["True / False"],
+            "default"     : "False",
+            "description" : "Determines whether the Real-Time Client API is set to shared resource mode (for example,Citrix). Set this to True when using a shared resource environment.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "false"
+            }
+        },
+        {
+            "property"    : "STANDALONE",
+            "values"      : ["1 or 0"],
+            "default"     : "0",
+            "description" : "When set to 1, the Client and Designer work without a server in standalone mode.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"0": "0"},{"1":"1"}],
+                "default" : "0"
+            }
+        },
+        {
+            "property"    : "useDomain",
+            "values"      : ["True / False"],
+            "default"     : "true",
+            "description" : "Determines that the Real-Time Client will use the Domain during log on.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "USESILENTLOGIN",
+            "values"      : ["True / False"],
+            "default"     : "true",
+            "description" : "Controls the behavior of the login. When set to True, the login is silent and the login form is not shown to the user. When set to False, the login is manual and the login form is shown to the user.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        }
+    
+    ],
+    "ITI"      : [
+        {
+            "property"    : "EGHOST",
+            "values"      : ["hostname/IP address"],
+            "default"     : ["no value"],
+            "description" : "Specifies the Server hostname",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGMSGFLDR",
+            "values"      : ["Text string"],
+            "default"     : [""],
+            "description" : "WHAT IS DESCRIPTION?",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGpauseRecordingFailedText",
+            "values"      : ["Text string"],
+            "default"     : ["Pause Recording Failed"],
+            "description" : "Describes the actual text which will appear if pause failure occurs.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "Pause Recording Failed"
+            }
+        },
+        {
+            "property"    : "EGpauseRecordingSucceededText",
+            "values"      : ["Text string"],
+            "default"     : ["Pause Recording Succeeded"],
+            "description" : "Describes the actual text which will appear when pause success occurs.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "Pause Recording Succeeded"
+            }
+        },
+        {
+            "property"    : "EGPORT",
+            "values"      : ["Number"],
+            "default"     : ["No value"],
+            "description" : "Specifies the Server port number.",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGresumeRecordingFailedText",
+            "values"      : ["Text string"],
+            "default"     : ["Resume Recording Failed"],
+            "description" : "Describes the actual text which will appear if resume recording failure occurs.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "Resume Recording Failed"
+            }
+        },
+        {
+            "property"    : "EGresumeRecordingSucceededText",
+            "values"      : ["Text string"],
+            "default"     : ["Resume Recording Succeeded"],
+            "description" : "Describes the actual text which will appear when resume recording success occurs.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "Resume Recording Succeeded"
+            }
+        },
+        {
+            "property"    : "EGSHOWCALLOUT",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : ["no value"],
+            "description" : "Show callout for feedback on recording automation actions.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGSIDEBYSIDE",
+            "values"      : ["True / false"],
+            "default"     : "no value",
+            "description" : "Indicates whether or not to install the ITI Bridge side by side.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "false"
+            }
+        },
+        {
+            "property"    : "EGstartRecordingFailedText",
+            "values"      : ["Text string"],
+            "default"     : ["Start Recording Failed"],
+            "description" : "Describes the actual text which will appear in the event of start recording failure.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "Start Recording Failed"
+            }
+        },
+        {
+            "property"    : "EGstartRecordingSucceededText",
+            "values"      : ["Text string"],
+            "default"     : ["Start Recording Succeeded"],
+            "description" : "Describes the actual text which appears in the event of start recording success.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "Start Recording Succeeded"
+            }
+        },
+        {
+            "property"    : "EGstopRecordingFailedText",
+            "values"      : ["Text string"],
+            "default"     : ["Stop Recording Failed"],
+            "description" : "Describes the actual text which appears in the event of stop recording failure.",
+            "control"     : {   
+                "type"    : "text",
+                "default" : "Stop Recording Failed"
+            }
+        },
+        {
+            "property"    : "EGstopRecordingSucceededText",
+            "values"      : ["Text string"],
+            "default"     : ["Stop Recording Succeeded"],
+            "description" : "Describes the actual text which appears in the event of stop recording success.",
+            "control"     : {
+                "type"    : "text",
+                "default" : "Stop Recording Succeeded"
+            }
+        },
+        {
+            "property"    : "UNIQUEOSLOGIN",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : ["no value"],
+            "description" : "Indicates whether to use an unique Operating System login.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : ""
+            }
+        }
+    ],
+    "RTAM"     : [
+        {
+            "property"    : "EG_DESKTOP",
+            "values"      : ["2 = Not installed.","3 = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install RTAM’s desktop monitoring component.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+            
+        },
+        {
+            "property"    : "EG_PROCESS",
+            "values"      : ["2 = Not installed.","3 = Installed."],
+            "default"     : "2",
+            "description" : "Indicates whether or not to install RTAM’s process monitoring component.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"Not Installed": "2"},{"Installed":"3"}],
+                "default" : "2"
+            }
+            
+        },
+        {
+            "property"    : "EGAGGREGATOR",
+            "values"      : ["none/tcp/rest"],
+            "default"     : "none",
+            "description" : "Indicates whether the aggregator is in use and if so, which protocol is used.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"none": ""},{"tcp":"tcp"},{"rest":"rest"}],
+                "default" : ""
+            }
+            
+        },
+        {
+            "property"    : "EGAPPMONMODE",
+            "values"      : ["master/slave"],
+            "default"     : "not includned",
+            "description" : "Application monitoring mode",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"not includned": ""},{"master":"master"},{"slave":"slave"}],
+                "default" : ""
+            }
+            
+        },
+        {
+            "property"    : "EGC2CCHANNEL",
+            "values"      : ["Text string"],
+            "default"     : "no value",
+            "description" : "Default channel name.",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+            
+        },
+        {
+            "property"    : "EGC2CTYPE",
+            "values"      : ["citrixlocal/citrixserver"],
+            "default"     : "no value",
+            "description" : "How the Real-Time Client should act.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"no value": ""},{"citrixlocal":"citrixlocal"},{"citrixserver":"citrixserver"}],
+                "default" : ""
+            }
+            
+        },
+        {
+            "property"    : "EGC2C",
+            "values"      : ["1 = checked.","No value = unchecked."],
+            "default"     : "no value",
+            "description" : "When set to 1, indicates that the application usage module should work in Citrix server mode.",
+            "control"     : {
+                "type"    : "checkbox",
+                "value"   : "1",
+                "default" : ""
+            } 
+        },
+        {
+            "property"    : "EGHOST",
+            "values"      : ["hostname/IP address"],
+            "default"     : ["no value"],
+            "description" : "Specifies the aggregator hostname.",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGLOUD",
+            "values"      : ["True / false"],
+            "default"     : "True",
+            "description" : "Silent / GUI installation.",
+            "control"     : {
+                "type"    : "select",
+                "values"  : [{"true": "true"},{"false":"false"}],
+                "default" : "true"
+            }
+        },
+        {
+            "property"    : "EGPORT",
+            "values"      : ["Number"],
+            "default"     : ["No value"],
+            "description" : "Specifies the aggregator port.",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "EGVAPPNAME",
+            "values"      : ["Text string"],
+            "default"     : ["No value"],
+            "description" : "Indicates the session process name.",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        },
+        {
+            "property"    : "SKIN",
+            "values"      : ["Text string"],
+            "default"     : [""],
+            "description" : "Callout skin theme (color)",
+            "control"     : {
+                "type"    : "text",
+                "default" : ""
+            }
+        }
+    ]
+}
