@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, 'src'),
-  entry: ['./index.js'],
+  entry: ['@babel/polyfill', './index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: './bundle.js',
@@ -16,7 +16,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       },
       {
         test: /\.css$/,
@@ -27,14 +27,14 @@ module.exports = {
       },
       {
         test: /\.txt$/,
-        loader: 'raw-loader'
-      }
-    ]
+        loader: 'raw-loader',
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
       inject: 'body',
-    })
-  ]
+    }),
+  ],
 };

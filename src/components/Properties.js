@@ -19,6 +19,8 @@ const six_five_props = require('../client_properties/properties.6.5.json');
 const six_six_props = require('../client_properties/properties.6.6.json');
 const six_seven_props = require('../client_properties/properties.6.7.json');
 
+require('formdata-polyfill');
+
 function replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, 'g'), replace);
 }
@@ -33,7 +35,10 @@ function jump(h) {
 
 function download(filename, text) {
   const element = document.createElement('a');
-  element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`);
+  element.setAttribute(
+    'href',
+    `data:text/plain;charset=utf-8,${encodeURIComponent(text)}`,
+  );
   element.setAttribute('download', filename);
 
   element.style.display = 'none';
@@ -49,7 +54,10 @@ class Properties extends React.Component {
     super(props);
     this.state = {
       properties: {
-        Designer: [], Client: [], ITI: [], RTAM: [],
+        Designer: [],
+        Client: [],
+        ITI: [],
+        RTAM: [],
       },
       version: props.version,
       software: props.software,
@@ -103,404 +111,442 @@ class Properties extends React.Component {
     }
   }
 
-    handleSubmit = e => {
-      e.preventDefault();
+  handleSubmit = e => {
+    e.preventDefault();
 
-      const formData = new FormData(e.target);
+    let formData = new FormData(e.target);
 
-      const formObject = {};
+    const formObject = {};
 
-      formObject[this.state.software] = [];
+    formObject[this.state.software] = [];
 
-      if (this.state.include_iti) formObject.ITI = [];
+    if (this.state.include_iti) formObject.ITI = [];
 
-      if (this.state.include_rtam) formObject.RTAM = [];
+    if (this.state.include_rtam) formObject.RTAM = [];
 
-      formData.forEach((value, key) => {
-        const regex = /\[(.*?)\]/g; // gets whats between square brackets
-        const match = regex.exec(key);
+    formData = Array.from(formData);
+    formData.forEach(value => {
+      const regex = /\[(.*?)\]/g; // gets whats between square brackets
+      const match = regex.exec(value[0]);
+      const inputValue = value[1];
 
-        if (match) {
-          const property = match[1];
-          const type = key.replace(match[0], '');
+      if (match) {
+        const property = match[1];
+        const type = value[0].replace(match[0], '');
 
-          formObject[type].push({
-            property,
-            value,
-          });
-        }
-      });
+        formObject[type].push({
+          property,
+          value: inputValue,
+        });
+      }
+    });
 
+    this.generateBatch(formObject);
+  };
 
-      this.generateBatch(formObject);
+  generateBatch = formValues => {
+    let batchSoftwareProperties = '';
+    let softwareBatch = null;
+    let batchITIProperties = null;
+    let batchRTAMProperties = null;
+    let batchScript = batch_init;
+
+    // Client / Designer properties
+    for (let i = 0; i < formValues[this.state.software].length; i++) {
+      const formProperty = formValues[this.state.software][i].property;
+      const formValue = formValues[this.state.software][i].value;
+
+      const sourceProperty = this.state.properties[this.state.software].find(
+        element => element.property === formProperty,
+      );
+
+      // checks if there was a change from default value
+      if (sourceProperty.control.default !== formValue) {
+        batchSoftwareProperties += `${formProperty}="${formValue}" `;
+      }
     }
 
-    generateBatch = formValues => {
-      let batchSoftwareProperties = '';
-      let softwareBatch = null;
-      let batchITIProperties = null;
-      let batchRTAMProperties = null;
-      let batchScript = batch_init;
+    batchSoftwareProperties = batchSoftwareProperties.trim();
 
-      // Client / Designer properties
-      for (let i = 0; i < formValues[this.state.software].length; i++) {
-        const formProperty = formValues[this.state.software][i].property;
-        const formValue = formValues[this.state.software][i].value;
+    // ITI properties
+    if (this.state.include_iti) {
+      batchITIProperties = '';
 
-        const sourceProperty = this.state.properties[this.state.software].find(
-          (element) => element.property === formProperty,
+      for (let i = 0; i < formValues.ITI.length; i++) {
+        const formProperty = formValues.ITI[i].property;
+        const formValue = formValues.ITI[i].value;
+
+        const sourceProperty = this.state.properties.ITI.find(
+          element => element.property === formProperty,
         );
 
         // checks if there was a change from default value
         if (sourceProperty.control.default !== formValue) {
-          batchSoftwareProperties += `${formProperty}="${formValue}" `;
+          batchITIProperties += `${formProperty}="${formValue}" `;
         }
       }
 
-      batchSoftwareProperties = batchSoftwareProperties.trim();
+      batchITIProperties = batchITIProperties.trim();
+    }
 
-      // ITI properties
-      if (this.state.include_iti) {
-        batchITIProperties = '';
+    // RTAM properties
+    if (this.state.include_rtam) {
+      batchRTAMProperties = '';
 
-        for (let i = 0; i < formValues.ITI.length; i++) {
-          const formProperty = formValues.ITI[i].property;
-          const formValue = formValues.ITI[i].value;
+      for (let i = 0; i < formValues.RTAM.length; i++) {
+        const formProperty = formValues.RTAM[i].property;
+        const formValue = formValues.RTAM[i].value;
 
-          const sourceProperty = this.state.properties.ITI.find(
-            (element) => element.property === formProperty,
-          );
+        const sourceProperty = this.state.properties.RTAM.find(
+          element => element.property === formProperty,
+        );
 
-          // checks if there was a change from default value
-          if (sourceProperty.control.default !== formValue) {
-            batchITIProperties += `${formProperty}="${formValue}" `;
-          }
+        // checks if there was a change from default value
+        if (sourceProperty.control.default !== formValue) {
+          batchRTAMProperties += `${formProperty}="${formValue}" `;
         }
-
-        batchITIProperties = batchITIProperties.trim();
       }
 
-      // RTAM properties
-      if (this.state.include_rtam) {
-        batchRTAMProperties = '';
+      batchRTAMProperties = batchRTAMProperties.trim();
+    }
 
-        for (let i = 0; i < formValues.RTAM.length; i++) {
-          const formProperty = formValues.RTAM[i].property;
-          const formValue = formValues.RTAM[i].value;
+    // Software batch preparation
+    if (this.state.software === 'Client') {
+      softwareBatch =
+        this.state.architecture === '6432'
+          ? this.state.batchTemplate.client
+          : this.state.batchTemplate.clientUnique;
+    } else {
+      softwareBatch =
+        this.state.architecture === '6432'
+          ? this.state.batchTemplate.designer
+          : this.state.batchTemplate.designerUnique;
+    }
 
-          const sourceProperty = this.state.properties.RTAM.find(
-            (element) => element.property === formProperty,
-          );
+    if (this.state.architecture === '6432') {
+      softwareBatch = softwareBatch.replace('{msi}', this.state.msi);
+      softwareBatch = replaceAll(softwareBatch, '{msi64}', this.state.msi64);
+    }
 
-          // checks if there was a change from default value
-          if (sourceProperty.control.default !== formValue) {
-            batchRTAMProperties += `${formProperty}="${formValue}" `;
-          }
-        }
+    if (this.state.architecture === '64') {
+      softwareBatch = replaceAll(softwareBatch, '{msi}', this.state.msi64);
+    }
 
-        batchRTAMProperties = batchRTAMProperties.trim();
-      }
+    if (this.state.architecture === '32') {
+      softwareBatch = replaceAll(softwareBatch, '{msi}', this.state.msi);
+    }
 
-      // Software batch preparation
-      if (this.state.software === 'Client') {
-        softwareBatch = this.state.architecture === '6432'
-          ? this.state.batchTemplate.client : this.state.batchTemplate.clientUnique;
-      } else {
-        softwareBatch = this.state.architecture === '6432'
-          ? this.state.batchTemplate.designer : this.state.batchTemplate.designerUnique;
-      }
+    softwareBatch = softwareBatch.replace(
+      '{properties}',
+      batchSoftwareProperties,
+    );
 
+    batchScript += softwareBatch;
+
+    // ITI batch preparation
+    if (this.state.include_iti) {
+      let itiBatch = this.state.batchTemplate.iti;
+
+      itiBatch = itiBatch.replace('{msi}', this.state.iti);
+      itiBatch = itiBatch.replace('{properties}', batchITIProperties);
+
+      batchScript += `\n\n${itiBatch}`;
+    }
+
+    // RTAM batch preparation
+    if (this.state.include_rtam) {
+      let rtamBatch = this.state.batchTemplate.rtam;
+
+      rtamBatch = rtamBatch.replace('{msi}', this.state.rtam);
+      rtamBatch = rtamBatch.replace('{properties}', batchRTAMProperties);
+
+      batchScript += `\n\n${rtamBatch}`;
+    }
+
+    if (this.state.include_hotfixes === false) {
+      batchScript += '\n\ngoto :success';
+    } else {
+      // Include HotFixes
 
       if (this.state.architecture === '6432') {
-        softwareBatch = softwareBatch.replace('{msi}', this.state.msi);
-        softwareBatch = replaceAll(softwareBatch, '{msi64}', this.state.msi64);
-      }
+        batchScript += `\n\n${this.state.batchTemplate.hotfixes}`;
 
-      if (this.state.architecture === '64') {
-        softwareBatch = replaceAll(softwareBatch, '{msi}', this.state.msi64);
-      }
+        const { software } = this.state;
+
+        // 32 BITs Hotfixes
+        batchScript += '\n\n:x86';
+        batchScript += '\nrem Applies patch to x86 Windows Operating System';
+
+        for (let i = 0; i < this.state.hotfixes.length; i++) {
+          const fileName = this.state.hotfixes[i].value;
+
+          batchScript += `\n\necho Copying file ${fileName} to C:\\Program Files\\NICE Systems\\Real-Time ${software}\\`;
+          batchScript += `\nxcopy  ".\\Hotfixes\\${fileName}" "C:\\Program Files\\NICE Systems\\Real-Time ${software}\\*" /y`;
+        }
+
+        batchScript += '\ngoto :success';
+
+        // 64 BITs Hotfixes
+        batchScript += '\n\n:x64';
+        batchScript += '\nrem Applies patch to x64 Windows Operating System';
+
+        for (let i = 0; i < this.state.hotfixes.length; i++) {
+          const fileName = this.state.hotfixes[i].value;
+
+          batchScript += `\n\necho Copying file ${fileName} to C:\\Program Files (x86)\\NICE Systems\\Real-Time ${software}\\`;
+          batchScript += `\nxcopy  ".\\Hotfixes\\${fileName}" "C:\\Program Files (x86)\\NICE Systems\\Real-Time ${software}\\*" /y`;
+        }
+
+        batchScript += '\ngoto :success';
+      } // end 6432
 
       if (this.state.architecture === '32') {
-        softwareBatch = replaceAll(softwareBatch, '{msi}', this.state.msi);
-      }
+        batchScript += `\n\n${this.state.batchTemplate.hotfixesUnique}`;
 
-      softwareBatch = softwareBatch.replace('{properties}', batchSoftwareProperties);
+        const { software } = this.state;
 
-      batchScript += softwareBatch;
+        // 32 BITs Hotfixes
+        batchScript += '\n\n:ApplyHotfixes';
+        batchScript += '\nrem Applies patch to x86 Windows Operating System';
 
-      // ITI batch preparation
-      if (this.state.include_iti) {
-        let itiBatch = this.state.batchTemplate.iti;
+        for (let i = 0; i < this.state.hotfixes.length; i++) {
+          const fileName = this.state.hotfixes[i].value;
 
-        itiBatch = itiBatch.replace('{msi}', this.state.iti);
-        itiBatch = itiBatch.replace('{properties}', batchITIProperties);
+          batchScript += `\n\necho Copying file ${fileName} to C:\\Program Files\\NICE Systems\\Real-Time ${software}\\`;
+          batchScript += `\nxcopy  ".\\Hotfixes\\${fileName}" "C:\\Program Files\\NICE Systems\\Real-Time ${software}\\*" /y`;
+        }
 
-        batchScript += `\n\n${itiBatch}`;
-      }
+        batchScript += '\ngoto :success';
+      } // end 32
 
-      // RTAM batch preparation
-      if (this.state.include_rtam) {
-        let rtamBatch = this.state.batchTemplate.rtam;
+      if (this.state.architecture === '64') {
+        batchScript += `\n\n${this.state.batchTemplate.hotfixesUnique}`;
 
-        rtamBatch = rtamBatch.replace('{msi}', this.state.rtam);
-        rtamBatch = rtamBatch.replace('{properties}', batchRTAMProperties);
+        const { software } = this.state;
 
-        batchScript += `\n\n${rtamBatch}`;
-      }
+        // 64 BITs Hotfixes
+        batchScript += '\n\n:ApplyHotfixes';
+        batchScript += '\nrem Applies patch to x64 Windows Operating System';
 
-      if (this.state.include_hotfixes === false) {
-        batchScript += '\n\ngoto :success';
-      } else {
-        // Include HotFixes
+        for (let i = 0; i < this.state.hotfixes.length; i++) {
+          const fileName = this.state.hotfixes[i].value;
 
-        if (this.state.architecture === '6432') {
-          batchScript += `\n\n${this.state.batchTemplate.hotfixes}`;
+          batchScript += `\n\necho Copying file ${fileName} to C:\\Program Files (x86)\\NICE Systems\\Real-Time ${software}\\`;
+          batchScript += `\nxcopy  ".\\Hotfixes\\${fileName}" "C:\\Program Files (x86)\\NICE Systems\\Real-Time ${software}\\*" /y`;
+        }
 
-          const { software } = this.state;
+        batchScript += '\ngoto :success';
+      } // end 64
+    } // end include hotfixes
 
-          // 32 BITs Hotfixes
-          batchScript += '\n\n:x86';
-          batchScript += '\nrem Applies patch to x86 Windows Operating System';
+    batchScript += `\n\n${this.state.batchTemplate.closure}`;
 
-          for (let i = 0; i < this.state.hotfixes.length; i++) {
-            const fileName = this.state.hotfixes[i].value;
+    this.setState({ batchScript });
 
-            batchScript += `\n\necho Copying file ${fileName} to C:\\Program Files\\NICE Systems\\Real-Time ${software}\\`;
-            batchScript += `\nxcopy  ".\\Hotfixes\\${fileName}" "C:\\Program Files\\NICE Systems\\Real-Time ${software}\\*" /y`;
-          }
+    jump('batchScriptContainer');
 
-          batchScript += '\ngoto :success';
-
-          // 64 BITs Hotfixes
-          batchScript += '\n\n:x64';
-          batchScript += '\nrem Applies patch to x64 Windows Operating System';
-
-          for (let i = 0; i < this.state.hotfixes.length; i++) {
-            const fileName = this.state.hotfixes[i].value;
-
-            batchScript += `\n\necho Copying file ${fileName} to C:\\Program Files (x86)\\NICE Systems\\Real-Time ${software}\\`;
-            batchScript += `\nxcopy  ".\\Hotfixes\\${fileName}" "C:\\Program Files (x86)\\NICE Systems\\Real-Time ${software}\\*" /y`;
-          }
-
-          batchScript += '\ngoto :success';
-        } // end 6432
-
-        if (this.state.architecture === '32') {
-          batchScript += `\n\n${this.state.batchTemplate.hotfixesUnique}`;
-
-          const { software } = this.state;
-
-          // 32 BITs Hotfixes
-          batchScript += '\n\n:ApplyHotfixes';
-          batchScript += '\nrem Applies patch to x86 Windows Operating System';
-
-          for (let i = 0; i < this.state.hotfixes.length; i++) {
-            const fileName = this.state.hotfixes[i].value;
-
-            batchScript += `\n\necho Copying file ${fileName} to C:\\Program Files\\NICE Systems\\Real-Time ${software}\\`;
-            batchScript += `\nxcopy  ".\\Hotfixes\\${fileName}" "C:\\Program Files\\NICE Systems\\Real-Time ${software}\\*" /y`;
-          }
-
-          batchScript += '\ngoto :success';
-        } // end 32
-
-        if (this.state.architecture === '64') {
-          batchScript += `\n\n${this.state.batchTemplate.hotfixesUnique}`;
-
-          const { software } = this.state;
-
-          // 64 BITs Hotfixes
-          batchScript += '\n\n:ApplyHotfixes';
-          batchScript += '\nrem Applies patch to x64 Windows Operating System';
-
-          for (let i = 0; i < this.state.hotfixes.length; i++) {
-            const fileName = this.state.hotfixes[i].value;
-
-            batchScript += `\n\necho Copying file ${fileName} to C:\\Program Files (x86)\\NICE Systems\\Real-Time ${software}\\`;
-            batchScript += `\nxcopy  ".\\Hotfixes\\${fileName}" "C:\\Program Files (x86)\\NICE Systems\\Real-Time ${software}\\*" /y`;
-          }
-
-          batchScript += '\ngoto :success';
-        } // end 64
-      } // end include hotfixes
-
-      batchScript += `\n\n${this.state.batchTemplate.closure}`;
-
-
-      this.setState({ batchScript });
-
-      jump('batchScriptContainer');
-
-      /* console.log(batchSoftwareProperties);
+    /* console.log(batchSoftwareProperties);
       console.log(batchITIProperties);
       console.log(batchRTAMProperties); */
-    }
+  };
 
-    downloadBatchScript = () => {
-      download('batchScript.bat', this.state.batchScript);
-    }
+  downloadBatchScript = () => {
+    download('batchScript.bat', this.state.batchScript);
+  };
 
-    addHotFix = () => {
-      const newHotfix = { id: this.state.hotfixes.length + 1, value: '' };
+  addHotFix = () => {
+    const newHotfix = { id: this.state.hotfixes.length + 1, value: '' };
 
-      this.setState((prevState) => ({
-        hotfixes: [
-          ...prevState.hotfixes,
-          newHotfix,
-        ],
-      }));
-    }
+    this.setState(prevState => ({
+      hotfixes: [...prevState.hotfixes, newHotfix],
+    }));
+  };
 
-    setHotfix = (value, hotfixId) => {
-      this.setState((prevState) => ({
-        hotfixes: prevState.hotfixes.map(hotfix => {
-          if (hotfixId === hotfix.id) {
-            return {
-              ...hotfix,
-              value,
-            };
-          }
-          return hotfix;
-        }),
-      }));
-    }
+  setHotfix = (value, hotfixId) => {
+    this.setState(prevState => ({
+      hotfixes: prevState.hotfixes.map(hotfix => {
+        if (hotfixId === hotfix.id) {
+          return {
+            ...hotfix,
+            value,
+          };
+        }
+        return hotfix;
+      }),
+    }));
+  };
 
-    render() {
-      return (
-        <div className="props-conatiner">
-          <h2>Installation Summary</h2>
-          <p>You&apos;re installing...</p>
-          <ul>
-            <li>
-RT
-              {this.state.software}
-              {' '}
-version:
-              {this.state.version}
-              {' '}
-- MSI:
-              {this.state.msi}
-              {' '}
+  render() {
+    return (
+      <div className="props-conatiner">
+        <h2>Installation Summary</h2>
+        <p>You&apos;re installing...</p>
+        <ul>
+          <li>
+            RT
+            {this.state.software} version:
+            {this.state.version} - MSI:
+            {this.state.msi}{' '}
+          </li>
+          <li>
+            {this.state.include_iti
+              ? `Installing ITI Bridge: ${this.state.iti}`
+              : 'Not Including ITI Bridge'}
+          </li>
+          <li>
+            {this.state.include_rtam
+              ? `Installing RTAM: ${this.state.rtam}`
+              : 'Not Including RTAM'}
+          </li>
+        </ul>
+        <h2>
+          {this.state.software === 'Client'
+            ? 'Client Properties'
+            : 'Designer Properties'}
+        </h2>
+        <form
+          onSubmit={this.handleSubmit}
+          id="propertiesForm"
+          className="properties-form"
+        >
+          <table className="table table-bordered">
+            <thead>
+              <tr className="d-flex">
+                <th className="col-3">Property</th>
+                <th className="col-2">Values</th>
+                <th className="col-5">Default value</th>
+                <th className="col-2">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <SoftwareProperties
+                properties={this.state.properties}
+                software={this.state.software}
+              />
+            </tbody>
+          </table>
+          {this.state.include_iti ? (
+            <div className="iti-properties">
+              <h2>ITI Bridge Properties</h2>
+              <table className="table table-bordered">
+                <thead>
+                  <tr className="d-flex">
+                    <th className="col-3">Property</th>
+                    <th className="col-2">Values</th>
+                    <th className="col-5">Default value</th>
+                    <th className="col-2">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ITIProperties properties={this.state.properties.ITI} />
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            ''
+          )}
 
-            </li>
-            <li>{this.state.include_iti ? `Installing ITI Bridge: ${this.state.iti}` : 'Not Including ITI Bridge' }</li>
-            <li>{this.state.include_rtam ? `Installing RTAM: ${this.state.rtam}` : 'Not Including RTAM' }</li>
-          </ul>
-          <h2>{this.state.software === 'Client' ? 'Client Properties' : 'Designer Properties'}</h2>
-          <form onSubmit={this.handleSubmit} className="properties-form">
-            <table className="table table-bordered">
-              <thead>
-                <tr className="d-flex">
-                  <th className="col-3">Property</th>
-                  <th className="col-2">Values</th>
-                  <th className="col-5">Default value</th>
-                  <th className="col-2">Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <SoftwareProperties
-                  properties={this.state.properties}
-                  software={this.state.software}
-                />
-              </tbody>
-            </table>
-            {this.state.include_iti ? (
-              <div className="iti-properties">
-                <h2>ITI Bridge Properties</h2>
-                <table className="table table-bordered">
-                  <thead>
-                    <tr className="d-flex">
-                      <th className="col-3">Property</th>
-                      <th className="col-2">Values</th>
-                      <th className="col-5">Default value</th>
-                      <th className="col-2">Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <ITIProperties properties={this.state.properties.ITI} />
-                  </tbody>
-                </table>
-              </div>
+          {this.state.include_rtam ? (
+            <div className="rtam-properties">
+              <h2>RTAM Properties</h2>
+              <table className="table table-bordered">
+                <thead>
+                  <tr className="d-flex">
+                    <th className="col-3">Property</th>
+                    <th className="col-2">Values</th>
+                    <th className="col-5">Default value</th>
+                    <th className="col-2">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <RTAMProperties properties={this.state.properties.RTAM} />
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            ''
+          )}
 
-            ) : ('')}
-
-            {this.state.include_rtam ? (
-              <div className="rtam-properties">
-                <h2>RTAM Properties</h2>
-                <table className="table table-bordered">
-                  <thead>
-                    <tr className="d-flex">
-                      <th className="col-3">Property</th>
-                      <th className="col-2">Values</th>
-                      <th className="col-5">Default value</th>
-                      <th className="col-2">Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <RTAMProperties properties={this.state.properties.RTAM} />
-                  </tbody>
-                </table>
-              </div>
-
-            ) : ('')}
-
-            {this.state.include_hotfixes ? (
-              <div className="hot-fixes-wrapper">
-                <h2>Hot Fixes</h2>
-                <p>
-Single files that will be copied to the RT
-                  {this.state.software}
-                  {' '}
-program files folder
-                </p>
-                {this.state.hotfixes.map((key) => (
-                  <div key={key.id} className="form-group row">
-                    <label htmlFor="msi" className="col-2 col-form-label">
-Hotfix
-                      {key.id}
-                      {' '}
-file name:
-                    </label>
-                    <div className="col-10">
-                      <input required type="text" value={key.value} onChange={e => this.setHotfix(e.target.value, key.id)} className="form-control" />
-                    </div>
+          {this.state.include_hotfixes ? (
+            <div className="hot-fixes-wrapper">
+              <h2>Hot Fixes</h2>
+              <p>
+                Single files that will be copied to the RT
+                {this.state.software} program files folder
+              </p>
+              {this.state.hotfixes.map(key => (
+                <div key={key.id} className="form-group row">
+                  <label htmlFor="msi" className="col-2 col-form-label">
+                    Hotfix
+                    {key.id} file name:
+                  </label>
+                  <div className="col-10">
+                    <input
+                      required
+                      type="text"
+                      value={key.value}
+                      onChange={e => this.setHotfix(e.target.value, key.id)}
+                      className="form-control"
+                    />
                   </div>
-                ))}
-                <div>
-                  <button type="button" onClick={this.addHotFix} className="btn btn-info">Add Hot Fix</button>
                 </div>
-              </div>
-            ) : ('')}
-
-
-            <div className="form-group row">
-              <div className="offset-4 col-8">
-                <button type="submit" className="btn btn-primary">Generate Script</button>
+              ))}
+              <div>
+                <button
+                  type="button"
+                  onClick={this.addHotFix}
+                  className="btn btn-info"
+                >
+                  Add Hot Fix
+                </button>
               </div>
             </div>
-          </form>
-          <div id="batchScriptContainer">
-            {this.state.batchScript ? (
-              <div>
-                <h2>
-Batch Script:
-                  <button onClick={this.downloadBatchScript} type="button" className="btn btn-success">Download file</button>
-                </h2>
-                <p>Bear in mind before execution...</p>
-                <ul>
-                  <li>All installers must be at the same folder level of the .bat script</li>
-                  <li>HotFixes must be placed under a folder named &ldquo;Hotfixes&ldquo;</li>
-                </ul>
-                <p>Preview:</p>
-                <pre id="batchScript">
-                  {this.state.batchScript}
-                </pre>
-              </div>
-            ) : ('')}
+          ) : (
+            ''
+          )}
+
+          <div className="form-group row">
+            <div className="offset-4 col-8">
+              <button type="submit" className="btn btn-primary">
+                Generate Script
+              </button>
+            </div>
           </div>
+        </form>
+        <div id="batchScriptContainer">
+          {this.state.batchScript ? (
+            <div>
+              <h2>
+                Batch Script:
+                <button
+                  onClick={this.downloadBatchScript}
+                  type="button"
+                  className="btn btn-success"
+                >
+                  Download file
+                </button>
+              </h2>
+              <p>Bear in mind before execution...</p>
+              <ul>
+                <li>
+                  All installers must be at the same folder level of the .bat
+                  script
+                </li>
+                <li>
+                  HotFixes must be placed under a folder named
+                  &ldquo;Hotfixes&ldquo;
+                </li>
+              </ul>
+              <p>Preview:</p>
+              <pre id="batchScript">{this.state.batchScript}</pre>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
-      );
-    }
+      </div>
+    );
+  }
 } // class end
 
 function renderTableCols(data, type) {
@@ -508,7 +554,7 @@ function renderTableCols(data, type) {
   let input_name = null;
 
   try {
-    htmlElements = data.map((key) => {
+    htmlElements = data.map(key => {
       input_name = `${type}[${key.property}]`;
       let result = null;
 
@@ -516,10 +562,16 @@ function renderTableCols(data, type) {
         result = (
           <tr key={Math.random()} className="d-flex">
             <th className="col-3">{key.property}</th>
-            <td className="col-2"><PropertyValues values={key.values} /></td>
+            <td className="col-2">
+              <PropertyValues values={key.values} />
+            </td>
             <td className="col-5">
-              <select className="custom-select" name={input_name}>
-                <RenderOptions options={key.control.values} default={key.control.default} />
+              <select
+                className="custom-select"
+                name={input_name}
+                defaultValue={key.control.default}
+              >
+                <RenderOptions options={key.control.values} />
               </select>
             </td>
             <td className="col-2">{key.description}</td>
@@ -533,11 +585,15 @@ function renderTableCols(data, type) {
             <th className="col-3">{key.property}</th>
             <td className="col-2">
               {' '}
-              <PropertyValues values={key.values} />
-              {' '}
+              <PropertyValues values={key.values} />{' '}
             </td>
             <td className="col-5">
-              <input type="text" name={input_name} className="form-control" defaultValue={key.control.default} />
+              <input
+                type="text"
+                name={input_name}
+                className="form-control"
+                defaultValue={key.control.default}
+              />
             </td>
             <td className="col-2">{key.description}</td>
           </tr>
@@ -548,7 +604,9 @@ function renderTableCols(data, type) {
         result = (
           <tr key={Math.random()} className="d-flex">
             <th className="col-3">{key.property}</th>
-            <td className="col-2"><PropertyValues values={key.values} /></td>
+            <td className="col-2">
+              <PropertyValues values={key.values} />
+            </td>
             <td className="col-5">
               <RenderCheckBox
                 type={type}
@@ -577,43 +635,34 @@ function SoftwareProperties(props) {
   const { properties } = props;
   let fullProperties = null;
 
-  fullProperties = props.software === 'Client' ? properties.Client : properties.Designer;
+  fullProperties =
+    props.software === 'Client' ? properties.Client : properties.Designer;
 
-  return (renderTableCols(fullProperties, props.software));
+  return renderTableCols(fullProperties, props.software);
 }
 
 function RTAMProperties(props) {
-  return (renderTableCols(props.properties, 'RTAM'));
+  return renderTableCols(props.properties, 'RTAM');
 }
 
 function ITIProperties(props) {
-  return (renderTableCols(props.properties, 'ITI'));
+  return renderTableCols(props.properties, 'ITI');
 }
 
 function PropertyValues(props) {
-  const propertyValues = props.values.map((key) => (<div key={Math.random()}>{key}</div>));
+  const propertyValues = props.values.map(key => (
+    <div key={Math.random()}>{key}</div>
+  ));
 
   return propertyValues;
 }
 
 function RenderOptions(props) {
-  const defaultValue = props.default;
-  const options = props.options.map((key) => {
-    if (defaultValue === Object.values(key)[0]) {
-      return (
-        <option
-          key={Math.random()}
-          defaultValue
-          value={Object.values(key)[0]}
-        >
-          { Object.keys(key)[0] }
-        </option>
-      );
-    }
-    return (
-      <option key={Math.random()} value={Object.values(key)[0]}>{ Object.keys(key)[0] }</option>
-    );
-  });
+  const options = props.options.map(key => (
+    <option key={Math.random()} value={Object.values(key)[0]}>
+      {Object.keys(key)[0]}
+    </option>
+  ));
 
   return options;
 }
@@ -627,9 +676,24 @@ function RenderCheckBox(props) {
   const input_name = `${props.type}[${props.property}]`;
 
   if (defaultValue === checkValue) {
-    input = (<input defaultChecked name={input_name} type="checkbox" className="custom-control-input" value={checkValue} />);
+    input = (
+      <input
+        defaultChecked
+        name={input_name}
+        type="checkbox"
+        className="custom-control-input"
+        value={checkValue}
+      />
+    );
   } else {
-    input = (<input name={input_name} type="checkbox" className="custom-control-input" value={checkValue} />);
+    input = (
+      <input
+        name={input_name}
+        type="checkbox"
+        className="custom-control-input"
+        value={checkValue}
+      />
+    );
   }
 
   return (
@@ -652,7 +716,6 @@ Properties.propTypes = {
   iti: PropTypes.string,
   rtam: PropTypes.string,
   include_hotfixes: PropTypes.bool,
-
 };
 
 Properties.defaultProps = {
