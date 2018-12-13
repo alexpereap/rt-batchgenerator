@@ -28,3 +28,9 @@
 button{
   cursor: pointer;
 }
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .d-flex{
+    display: table-row !important;
+  }
+}
