@@ -74,6 +74,9 @@ class Properties extends React.Component {
       },
       batchScript: false,
       hotfixes: [{ id: 1, value: '' }],
+      showClientProperties: true,
+      showITIProperties: true,
+      showRTAMProperties: true,
     };
   }
 
@@ -367,10 +370,41 @@ class Properties extends React.Component {
     }));
   };
 
+  toggleVisibleProps = (e, type) => {
+    e.preventDefault();
+    window.location.href = '/#summary';
+    switch (type) {
+      case 'client':
+        this.setState(prevState => {
+          const showClientProperties = !prevState.showClientProperties;
+          return { showClientProperties };
+        });
+        break;
+
+      case 'rtam':
+        this.setState(prevState => {
+          const showRTAMProperties = !prevState.showRTAMProperties;
+          return { showRTAMProperties };
+        });
+        break;
+
+      case 'iti':
+        this.setState(prevState => {
+          const showITIProperties = !prevState.showITIProperties;
+          return { showITIProperties };
+        });
+        break;
+
+      default:
+        return false;
+    }
+    return true;
+  };
+
   render() {
     return (
       <div className="props-conatiner">
-        <h2>Installation Summary</h2>
+        <h2 id="summary">Installation Summary</h2>
         <p>You&apos;re installing...</p>
         <ul>
           <li>
@@ -390,17 +424,35 @@ class Properties extends React.Component {
               : 'Not Including RTAM'}
           </li>
         </ul>
-        <h2>
-          {this.state.software === 'Client'
-            ? 'Client Properties'
-            : 'Designer Properties'}
-        </h2>
+
         <form
           onSubmit={this.handleSubmit}
           id="propertiesForm"
           className="properties-form"
         >
-          <table className="table table-bordered">
+          <h2 className="sticky">
+            {this.state.software === 'Client'
+              ? 'Client Properties'
+              : 'Designer Properties'}
+            <button
+              type="button"
+              className="hs-properties"
+              onClick={e => this.toggleVisibleProps(e, 'client')}
+            >
+              {this.state.showClientProperties ? 'hide' : 'show'}
+            </button>
+          </h2>
+          <hr
+            style={{
+              display: this.state.showClientProperties ? 'none' : 'block',
+            }}
+          />
+          <table
+            style={{
+              display: this.state.showClientProperties ? 'table' : 'none',
+            }}
+            className="table table-bordered"
+          >
             <thead>
               <tr className="d-flex">
                 <th className="col-3">Property</th>
@@ -418,8 +470,27 @@ class Properties extends React.Component {
           </table>
           {this.state.include_iti ? (
             <div className="iti-properties">
-              <h2>ITI Bridge Properties</h2>
-              <table className="table table-bordered">
+              <h2 className="sticky">
+                ITI Bridge Properties
+                <button
+                  type="button"
+                  className="hs-properties"
+                  onClick={e => this.toggleVisibleProps(e, 'iti')}
+                >
+                  {this.state.showITIProperties ? 'hide' : 'show'}
+                </button>
+              </h2>
+              <hr
+                style={{
+                  display: this.state.showITIProperties ? 'none' : 'block',
+                }}
+              />
+              <table
+                style={{
+                  display: this.state.showITIProperties ? 'table' : 'none',
+                }}
+                className="table table-bordered"
+              >
                 <thead>
                   <tr className="d-flex">
                     <th className="col-3">Property</th>
@@ -439,8 +510,27 @@ class Properties extends React.Component {
 
           {this.state.include_rtam ? (
             <div className="rtam-properties">
-              <h2>RTAM Properties</h2>
-              <table className="table table-bordered">
+              <h2 className="sticky">
+                RTAM Properties
+                <button
+                  type="button"
+                  className="hs-properties"
+                  onClick={e => this.toggleVisibleProps(e, 'rtam')}
+                >
+                  {this.state.showRTAMProperties ? 'hide' : 'show'}
+                </button>
+              </h2>
+              <hr
+                style={{
+                  display: this.state.showRTAMProperties ? 'none' : 'block',
+                }}
+              />
+              <table
+                style={{
+                  display: this.state.showRTAMProperties ? 'table' : 'none',
+                }}
+                className="table table-bordered"
+              >
                 <thead>
                   <tr className="d-flex">
                     <th className="col-3">Property</th>

@@ -34,3 +34,17 @@ button{
     display: table-row !important;
   }
 }
+
+.hs-properties{
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.sticky{
+  position: sticky;
+  position: -webkit-sticky;
+  top:0;
+  background: #FFF;
+  z-index: 10;
+  width:107%;
+}

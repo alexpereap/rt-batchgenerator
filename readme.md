@@ -14,6 +14,9 @@ The tool is built using REACT JS 16.x and packaged with WebPack 4.x.
  - To automatically fix code style errors run: npm run lint -- --fix.
 
 ## Change log
+v1.3.2
+ - Added show/hide sticky buttons to client, iti and rtam properties
+
 V1.3.1
  - Added dynamic data functionality for "Include ITI Bridge" and "Include RTAM" fields. 
  

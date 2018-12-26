@@ -1,5 +1,6 @@
 Change Log:
-
+v1.3.2
+ - Added show/hide sticky buttons to client, iti and rtam properties
 V1.3.1
  - Added dynamic data functionality for "Include ITI Bridge" and "Include RTAM" fields.
 V1.3
