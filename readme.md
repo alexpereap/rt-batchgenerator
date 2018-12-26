@@ -14,15 +14,15 @@ The tool is built using REACT JS 16.x and packaged with WebPack 4.x.
  - To automatically fix code style errors run: npm run lint -- --fix.
 
 ## Change log
-V1.1
- - 64 bit msi file name not working bug fix.
- - Added 32 or 64 bit architecture select option.
- - 
+V1.3.1
+ - Added dynamic data functionality for "Include ITI Bridge" and "Include RTAM" fields. 
+V1.3
+ - Moved whole project to webpack 4.
+ - Added full support to internet explorer 9+.
 V1.2
  - Added APA 6.7 support.
    properties added: EGCMSCOMCTRL.
    Properties removed: EGSVNHTTPS, EGSVNIP, EGSVNPORT, EGSYNCINTERVAL, RANODELIST.
-
-V1.3
- - Moved whole project to webpack 4.
- - Added full support to internet explorer 9+.
+V1.1
+ - 64 bit msi file name not working bug fix.
+ - Added 32 or 64 bit architecture select option.

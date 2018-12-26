@@ -1,0 +1,68 @@
+{
+  "6.4":{
+    "ITI": [
+      "NICE Insight to Impact Bridge for NEP6.4.msi",
+      "NICE Insight to Impact Bridge for NEP6.3.msi",
+      "NICE Insight to Impact Bridge for NES6.7.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.4x.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.48.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.47.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.2x.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.1x.msi"
+    ],
+    "RTAM": [
+      "NICE RTAM Upgrade R6.4.0.msi"
+    ]
+  },
+  "6.5":{
+    "ITI": [
+      "NICE Insight to Impact Bridge for NES6.6.msi",
+      "NICE Insight to Impact Bridge for NES6.5.msi",
+      "NICE Insight to Impact Bridge for NEP6.4.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.4x.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.48.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.47.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.2x.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.1x.msi",
+      "NICE Insight to Impact Bridge for NEP6.3.msi",
+      "NICE Insight to Impact Bridge for NES6.7.msi"
+    ],
+    "RTAM": [
+      "NICE RTAM Upgrade R6.5.0.msi"
+    ]
+  },
+  "6.6":{
+    "ITI": [
+      "NICE Insight to Impact Bridge for NEP6.4.msi",
+      "NICE Insight to Impact Bridge for NES6.7.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.4x.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.48.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.47.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.2x.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.1x.msi",
+      "NICE Insight to Impact Bridge for NES6.6.msi",
+      "NICE Insight to Impact Bridge for NES6.5.msi",
+      "NICE Insight to Impact Bridge for NEP6.3.msi"
+    ],
+    "RTAM": [
+      "NICE RTAM Upgrade R6.6.0.msi"
+    ]
+  },
+  "6.7":{
+    "ITI": [
+      "NICE Insight to Impact Bridge for NES6.7.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.4x.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.48.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.47.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.2x.msi",
+      "NICE Insight to Impact Bridge for NIM4.1.1x.msi",
+      "NICE Insight to Impact Bridge for NES6.6.msi",
+      "NICE Insight to Impact Bridge for NES6.5.msi",
+      "NICE Insight to Impact Bridge for NEP6.4.msi",
+      "NICE Insight to Impact Bridge for NEP6.3.msi"
+    ],
+    "RTAM": [
+      "NICE RTAM Upgrade R6.7.0.msi"
+    ]
+  }
+}
