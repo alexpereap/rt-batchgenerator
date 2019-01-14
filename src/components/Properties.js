@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import download from '../helpers/download';
 
 // batch skeleton
 import batch_init from '../batch_templates/init.txt';
@@ -12,8 +13,6 @@ import batch_iti from '../batch_templates/iti.txt';
 import batch_rtam from '../batch_templates/rtam.txt';
 import batch_hotfixes from '../batch_templates/hotfixes.txt';
 import batch_hotfixesUnique from '../batch_templates/hotfixesUniqueArch.txt';
-
-const FileSaver = require('file-saver');
 
 // client properties
 const six_four_props = require('../client_properties/properties.6.4.json');
@@ -33,11 +32,6 @@ function jump(h) {
   setTimeout(() => {
     window.scrollTo(0, top);
   }, 100);
-}
-
-function download(filename, text) {
-  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-  FileSaver.saveAs(blob, filename);
 }
 
 class Properties extends React.Component {

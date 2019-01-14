@@ -48,3 +48,11 @@ button{
   z-index: 10;
   width:107%;
 }
+
+#ChooseAction{
+  text-align: center;
+}
+
+#ChooseAction button:first-child{
+  margin-right: 20px;
+}

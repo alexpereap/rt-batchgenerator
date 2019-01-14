@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './Form';
 import Properties from './Properties';
+import ChooseAction from './ChooseAction';
 
 // const test = 'ho';
 
@@ -8,19 +9,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      show_form: true,
-      batchProperties: {
-
-      },
+      show_form: false,
+      show_choose_action: true,
+      batchProperties: {},
     };
   }
 
   setbatchProperties = batchProperties => {
     this.setState({ batchProperties });
     this.setState({ show_form: false });
-  }
+  };
+
+  shoWChooseAction = () => {
+    this.setState({ show_choose_action: false });
+    this.setState({ show_form: true });
+  };
 
   render() {
+    if (this.state.show_choose_action === true) {
+      return <ChooseAction setChooseAction={this.shoWChooseAction} />;
+    }
     if (this.state.show_form === true) {
       return <Form setProperties={this.setbatchProperties} />;
     }

@@ -1,0 +1,110 @@
+@echo off
+echo(%cd%
+pushd %~dp0
+echo(%cd%
+setlocal
+echo.
+
+title Installing Package...
+CLS
+set error="NoError"
+
+:StopClient
+echo Closing Applications...
+taskkill /f /t /im RTWatchDog.exe >nul 2>&1
+taskkill /f /t /im RTClient.exe >nul 2>&1
+taskkill /f /t /im RTI Launcher.exe >nul 2>&1
+echo applications succesfully closed ...
+rem Evaluates processor architecture
+
+if defined ProgramFiles set progfiles=%ProgramFiles%
+if defined ProgramFiles(x86) set progfiles=%ProgramFiles(x86)%
+
+echo architecture check completed....
+echo the progfiles is set to: %progfiles%
+:CHECKISNTALLEDITI
+:UNINSTALLITI
+:CHECKISNTALLEDRTAM
+
+rem Direct.ApplicationMonitoring.dll
+rem Direct.DesktopMonitoring.dll
+rem Direct.RTAConnect.dll
+
+echo Checking if RTAM is installed ...
+set rtamInstalled="%progfiles%\NICE Systems\Real-Time Client\Direct.ApplicationMonitoring.dll"
+echo %rtamInstalled%
+if exist %rtamInstalled% (
+echo RTAM is installed.
+goto :UNINSTALLRTAM
+) else  (
+echo RTAM installation was not found
+GOTO :CHECKISNTALLEDITI
+)
+
+:UNINSTALLRTAM
+echo Uninstalling RTAM ...
+MsiExec.exe /X{61E009A5-CC80-4F80-8F9B-8FF73AEA3981} /passive /qn
+echo command line uninstall RTAM executed ...
+if not %errorlevel% equ 0 ( echo error uninstalling the RTAM: %errorlevel% )
+
+:CHECKISNTALLEDITI
+echo Checking if ITI Bridge is installed ...
+set itiInstalled="%progfiles%\NICE Systems\Real-Time Client\Direct.RTIConnect.dll"
+echo %itiInstalled%
+if exist %itiInstalled% (
+echo ITI Bridge is installed.
+goto :UNINSTALLITI
+) else  (
+echo the ITI  was not found.
+GOTO :CHECKISNTALLEDCLIENT
+)
+
+:UNINSTALLITI
+echo Uninstalling ITI
+MsiExec.exe /X{92B2CF0E-6827-4E28-9B8B-BA4E4EB9A12F} /passive /qn
+if not %errorlevel% equ 0 (
+echo error installing the ITI
+)
+
+:CHECKISNTALLEDCLIENT
+echo Checking if Client is installed ...
+set rtClientInstalled="%progfiles%\NICE Systems\Real-Time Client\RTClient.exe"
+echo %rtClientInstalled%
+if exist %rtClientInstalled% (
+echo Client is installed.
+goto :UNINSTALLRTCLIENT
+) else  (
+echo the Client was not found.
+goto :success
+)
+
+:UNINSTALLRTCLIENT
+echo Uninstalling Client ...
+MsiExec.exe /X{8816E532-8989-4DAA-B213-00E02F542E10} /passive /qn
+echo errorlevel when executing uninstall command for Client : %errorlevel%
+
+
+:success
+echo Finished uninstall!
+endlocal
+echo.
+echo Complete!
+echo.
+echo Window will close in 10 seconds...
+ping -n 11 localhost >nul 2>&1
+pause
+goto :eof
+:error
+
+echo.
+echo Error detected!
+
+echo.
+echo %errorlevel%
+echo Log file = %log%
+echo.
+echo %error%
+echo Window will close in 10 seconds...
+pause
+ping -n 11 localhost >nul 2>&1
+endlocal
