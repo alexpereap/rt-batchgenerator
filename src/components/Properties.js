@@ -632,13 +632,14 @@ function renderTableCols(data, type) {
     htmlElements = data.map(key => {
       input_name = `${type}[${key.property}]`;
       let result = null;
+      const inputKey = `${type}_${key.property}`;
 
       if (key.control.type === 'select') {
         result = (
-          <tr key={Math.random()} className="d-flex">
+          <tr key={inputKey} className="d-flex">
             <th className="col-3">{key.property}</th>
             <td className="col-2">
-              <PropertyValues values={key.values} />
+              <PropertyValues inputKey={inputKey} values={key.values} />
             </td>
             <td className="col-5">
               <select
@@ -646,7 +647,7 @@ function renderTableCols(data, type) {
                 name={input_name}
                 defaultValue={key.control.default}
               >
-                <RenderOptions options={key.control.values} />
+                <RenderOptions inputKey={inputKey} options={key.control.values} />
               </select>
             </td>
             <td className="col-2">{key.description}</td>
@@ -656,11 +657,11 @@ function renderTableCols(data, type) {
 
       if (key.control.type === 'text') {
         result = (
-          <tr key={Math.random()} className="d-flex">
+          <tr key={inputKey} className="d-flex">
             <th className="col-3">{key.property}</th>
             <td className="col-2">
               {' '}
-              <PropertyValues values={key.values} />{' '}
+              <PropertyValues inputKey={inputKey} values={key.values} />{' '}
             </td>
             <td className="col-5">
               <input
@@ -677,10 +678,10 @@ function renderTableCols(data, type) {
 
       if (key.control.type === 'checkbox') {
         result = (
-          <tr key={Math.random()} className="d-flex">
+          <tr key={inputKey} className="d-flex">
             <th className="col-3">{key.property}</th>
             <td className="col-2">
-              <PropertyValues values={key.values} />
+              <PropertyValues inputKey={inputKey} values={key.values} />
             </td>
             <td className="col-5">
               <RenderCheckBox
@@ -725,17 +726,17 @@ function ITIProperties(props) {
 }
 
 function PropertyValues(props) {
-  const propertyValues = props.values.map(key => (
-    <div key={Math.random()}>{key}</div>
+  const propertyValues = props.values.map(value => (
+    <div key={`${props.inputKey}_propValue_${value}`}>{value}</div>
   ));
 
   return propertyValues;
 }
 
 function RenderOptions(props) {
-  const options = props.options.map(key => (
-    <option key={Math.random()} value={Object.values(key)[0]}>
-      {Object.keys(key)[0]}
+  const options = props.options.map(value => (
+    <option key={`${props.inputKey}_option_${value}`} value={Object.values(value)[0]}>
+      {Object.keys(value)[0]}
     </option>
   ));
 
