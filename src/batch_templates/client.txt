@@ -1,8 +1,14 @@
 echo Starting RT Client silent install...
 :Install
-if defined ProgramFiles set msi={msi}
-if defined ProgramFiles(x86) set msi={msi64}
-
+IF %PROCESSOR_ARCHITECTURE% == x86 ( 
+    set msi={msi}
+)
+IF  %PROCESSOR_ARCHITECTURE% == x64  (
+    set msi={msi64}
+)
+IF  %PROCESSOR_ARCHITECTURE% == AMD64  (
+    set msi={msi64}
+)
 set log=log\NICE Real-Time Client %datetime%.log
 echo Installing %msi%...
 msiexec /i "%msi%" /qn /passive {properties} /l*v "%log%"

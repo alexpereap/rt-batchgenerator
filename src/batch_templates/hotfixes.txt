@@ -2,12 +2,17 @@
 echo Applying Hotfixes...
 
 rem Evaluates proccesor architecture
-if defined ProgramFiles (
+IF %PROCESSOR_ARCHITECTURE% == x86 ( 
     echo x86 Architecture Patch
-    goto :x86
+    goto :x86    
 )
 
-if defined ProgramFiles(x86) (
+IF  %PROCESSOR_ARCHITECTURE% == x64  (
     echo x64 Architecture Patch
-    goto :x64
+    goto :x64   
+)
+
+IF  %PROCESSOR_ARCHITECTURE% == AMD64  (
+    echo x64 Architecture Patch
+    goto :x64   
 )
