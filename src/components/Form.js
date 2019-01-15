@@ -46,25 +46,22 @@ class Form extends React.Component {
 
   setMsi64 = e => this.setState({ msi64: e.target.value });
 
-  toggleITI = () =>
-    this.setState(prevState => {
-      const oposite = !prevState.include_iti;
-      return { include_iti: oposite };
-    });
+  toggleITI = () => this.setState(prevState => {
+    const oposite = !prevState.include_iti;
+    return { include_iti: oposite };
+  });
 
   setITI = e => this.setState({ iti: e.target.value });
 
-  toggleRTAM = () =>
-    this.setState(prevState => {
-      const oposite = !prevState.include_rtam;
-      return { include_rtam: oposite };
-    });
+  toggleRTAM = () => this.setState(prevState => {
+    const oposite = !prevState.include_rtam;
+    return { include_rtam: oposite };
+  });
 
-  toggleHotFixes = () =>
-    this.setState(prevState => {
-      const oposite = !prevState.include_hotfixes;
-      return { include_hotfixes: oposite };
-    });
+  toggleHotFixes = () => this.setState(prevState => {
+    const oposite = !prevState.include_hotfixes;
+    return { include_hotfixes: oposite };
+  });
 
   setRTAM = e => this.setState({ rtam: e.target.value });
 
@@ -204,9 +201,9 @@ class Form extends React.Component {
                 />
               </div>
             </div>
-          ) : (
-            ''
-          )}
+            ) : (
+              ''
+            )}
           {this.state.architecture === '6432' ||
           this.state.architecture === '64' ? (
             <div className="form-group row">
@@ -225,9 +222,9 @@ class Form extends React.Component {
                 />
               </div>
             </div>
-          ) : (
-            ''
-          )}
+            ) : (
+              ''
+            )}
           <div className="form-group row">
             <label className="col-4">Include ITI Bridge</label>
             <div className="col-8 extra-component-wrapper">
