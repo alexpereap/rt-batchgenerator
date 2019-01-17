@@ -71,6 +71,9 @@ class Properties extends React.Component {
       showClientProperties: true,
       showITIProperties: true,
       showRTAMProperties: true,
+      searchSoftwareFilter: '',
+      searchITIFilter: '',
+      searchRTAMFilter: '',
     };
   }
 
@@ -395,6 +398,214 @@ class Properties extends React.Component {
     return true;
   };
 
+  SoftwareProperties = (properties, software) => {
+    let fullProperties = null;
+    const filterRegex = RegExp(`[a-zA-Z]*${this.state.searchSoftwareFilter}[a-zA-Z]*`, 'gmi');
+
+    fullProperties =
+      software === 'Client' ? properties.Client : properties.Designer;
+
+    if (this.state.searchSoftwareFilter !== '') {
+      fullProperties = fullProperties.filter(item => {
+        if (filterRegex.test(item.property)) {
+          item.visible = true;
+        } else {
+          item.visible = false;
+        }
+
+        return item;
+      });
+    } else {
+      fullProperties = fullProperties.filter(item => {
+        item.visible = true;
+        return item;
+      });
+    }
+
+    return this.renderTableCols(fullProperties, software);
+  }
+
+
+  renderTableCols = (data, type) => {
+    let htmlElements = null;
+    let input_name = null;
+
+    try {
+      htmlElements = data.map(key => {
+        input_name = `${type}[${key.property}]`;
+        let result = null;
+        const inputKey = `${type}_${key.property}`;
+
+        if (key.control.type === 'select') {
+          result = (
+            <tr
+              key={inputKey}
+              className="d-flex"
+              ref={(node) => {
+                if (node && key.visible === true) {
+                  node.style.setProperty('display', 'inherit');
+                } else if (node && key.visible === false) {
+                  node.style.setProperty('display', 'none', 'important');
+                }
+              }}
+            >
+              <th className="col-3">{key.property}</th>
+              <td className="col-2">
+                <PropertyValues inputKey={inputKey} values={key.values} />
+              </td>
+              <td className="col-5">
+                <select
+                  className="custom-select"
+                  name={input_name}
+                  defaultValue={key.control.default}
+                >
+                  <RenderOptions inputKey={inputKey} options={key.control.values} />
+                </select>
+              </td>
+              <td className="col-2">{key.description}</td>
+            </tr>
+          );
+        }
+
+        if (key.control.type === 'text') {
+          result = (
+            <tr
+              key={inputKey}
+              className="d-flex"
+              ref={(node) => {
+                if (node && key.visible === true) {
+                  node.style.setProperty('display', 'inherit');
+                } else if (node && key.visible === false) {
+                  node.style.setProperty('display', 'none', 'important');
+                }
+              }}
+            >
+              <th className="col-3">{key.property}</th>
+              <td className="col-2">
+                {' '}
+                <PropertyValues inputKey={inputKey} values={key.values} />{' '}
+              </td>
+              <td className="col-5">
+                <input
+                  type="text"
+                  name={input_name}
+                  className="form-control"
+                  defaultValue={key.control.default}
+                />
+              </td>
+              <td className="col-2">{key.description}</td>
+            </tr>
+          );
+        }
+
+        if (key.control.type === 'checkbox') {
+          result = (
+            <tr
+              key={inputKey}
+              className="d-flex"
+              ref={(node) => {
+                if (node && key.visible === true) {
+                  node.style.setProperty('display', 'inherit');
+                } else if (node && key.visible === false) {
+                  node.style.setProperty('display', 'none', 'important');
+                }
+              }}
+            >
+              <th className="col-3">{key.property}</th>
+              <td className="col-2">
+                <PropertyValues inputKey={inputKey} values={key.values} />
+              </td>
+              <td className="col-5">
+                <RenderCheckBox
+                  type={type}
+                  property={key.property}
+                  value={key.control.value}
+                  default={key.control.default}
+                />
+              </td>
+              <td className="col-2">{key.description}</td>
+            </tr>
+          );
+        }
+
+        return result;
+      });
+    } catch (e) {
+      /*eslint-disable */
+      console.log(e);
+      /* eslint-enable */
+    }
+
+    return htmlElements;
+  }
+
+
+  RTAMProperties = properties => {
+    const filterRegex = RegExp(`[a-zA-Z]*${this.state.searchRTAMFilter}[a-zA-Z]*`, 'gmi');
+
+    if (this.state.searchRTAMFilter !== '') {
+      properties = properties.filter(item => {
+        if (filterRegex.test(item.property)) {
+          item.visible = true;
+        } else {
+          item.visible = false;
+        }
+
+        return item;
+      });
+    } else {
+      properties = properties.filter(item => {
+        item.visible = true;
+        return item;
+      });
+    }
+
+    return this.renderTableCols(properties, 'RTAM');
+  }
+
+  ITIProperties = properties => {
+    const filterRegex = RegExp(`[a-zA-Z]*${this.state.searchITIFilter}[a-zA-Z]*`, 'gmi');
+
+    if (this.state.searchITIFilter !== '') {
+      properties = properties.filter(item => {
+        if (filterRegex.test(item.property)) {
+          item.visible = true;
+        } else {
+          item.visible = false;
+        }
+
+        return item;
+      });
+    } else {
+      properties = properties.filter(item => {
+        item.visible = true;
+        return item;
+      });
+    }
+
+    return this.renderTableCols(properties, 'ITI');
+  }
+
+  setSearchFilter = (type, e) => {
+    switch (type) {
+      case 'software':
+        this.setState({ searchSoftwareFilter: e.target.value });
+        break;
+
+      case 'iti':
+        this.setState({ searchITIFilter: e.target.value });
+        break;
+
+      case 'rtam':
+        this.setState({ searchRTAMFilter: e.target.value });
+        break;
+
+      default:
+        this.setState({ searchSoftwareFilter: e.target.value });
+        break;
+    }
+  }
+
   render() {
     return (
       <div className="props-conatiner">
@@ -435,6 +646,16 @@ class Properties extends React.Component {
             >
               {this.state.showClientProperties ? 'hide' : 'show'}
             </button>
+            <input
+              type="text"
+              placeholder={`Search a ${this.state.software} property`}
+              className="form-control"
+              value={this.state.searchSoftwareFilter}
+              onChange={(e) => this.setSearchFilter('software', e)}
+              style={{
+                display: this.state.showClientProperties ? 'block' : 'none',
+              }}
+            />
           </h2>
           <hr
             style={{
@@ -456,10 +677,7 @@ class Properties extends React.Component {
               </tr>
             </thead>
             <tbody>
-              <SoftwareProperties
-                properties={this.state.properties}
-                software={this.state.software}
-              />
+              {this.SoftwareProperties(this.state.properties, this.state.software)}
             </tbody>
           </table>
           {this.state.include_iti ? (
@@ -473,6 +691,16 @@ class Properties extends React.Component {
                 >
                   {this.state.showITIProperties ? 'hide' : 'show'}
                 </button>
+                <input
+                  type="text"
+                  placeholder="Search an ITI property"
+                  className="form-control"
+                  value={this.state.searchITIFilter}
+                  onChange={(e) => this.setSearchFilter('iti', e)}
+                  style={{
+                    display: this.state.showITIProperties ? 'block' : 'none',
+                  }}
+                />
               </h2>
               <hr
                 style={{
@@ -494,7 +722,7 @@ class Properties extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <ITIProperties properties={this.state.properties.ITI} />
+                  {this.ITIProperties(this.state.properties.ITI)}
                 </tbody>
               </table>
             </div>
@@ -513,6 +741,16 @@ class Properties extends React.Component {
                 >
                   {this.state.showRTAMProperties ? 'hide' : 'show'}
                 </button>
+                <input
+                  type="text"
+                  placeholder="Search a RTAM property"
+                  className="form-control"
+                  value={this.state.searchRTAMFilter}
+                  onChange={(e) => this.setSearchFilter('rtam', e)}
+                  style={{
+                    display: this.state.showRTAMProperties ? 'block' : 'none',
+                  }}
+                />
               </h2>
               <hr
                 style={{
@@ -534,7 +772,7 @@ class Properties extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  <RTAMProperties properties={this.state.properties.RTAM} />
+                  {this.RTAMProperties(this.state.properties.RTAM)}
                 </tbody>
               </table>
             </div>
@@ -624,107 +862,6 @@ class Properties extends React.Component {
   }
 } // class end
 
-function renderTableCols(data, type) {
-  let htmlElements = null;
-  let input_name = null;
-
-  try {
-    htmlElements = data.map(key => {
-      input_name = `${type}[${key.property}]`;
-      let result = null;
-      const inputKey = `${type}_${key.property}`;
-
-      if (key.control.type === 'select') {
-        result = (
-          <tr key={inputKey} className="d-flex">
-            <th className="col-3">{key.property}</th>
-            <td className="col-2">
-              <PropertyValues inputKey={inputKey} values={key.values} />
-            </td>
-            <td className="col-5">
-              <select
-                className="custom-select"
-                name={input_name}
-                defaultValue={key.control.default}
-              >
-                <RenderOptions inputKey={inputKey} options={key.control.values} />
-              </select>
-            </td>
-            <td className="col-2">{key.description}</td>
-          </tr>
-        );
-      }
-
-      if (key.control.type === 'text') {
-        result = (
-          <tr key={inputKey} className="d-flex">
-            <th className="col-3">{key.property}</th>
-            <td className="col-2">
-              {' '}
-              <PropertyValues inputKey={inputKey} values={key.values} />{' '}
-            </td>
-            <td className="col-5">
-              <input
-                type="text"
-                name={input_name}
-                className="form-control"
-                defaultValue={key.control.default}
-              />
-            </td>
-            <td className="col-2">{key.description}</td>
-          </tr>
-        );
-      }
-
-      if (key.control.type === 'checkbox') {
-        result = (
-          <tr key={inputKey} className="d-flex">
-            <th className="col-3">{key.property}</th>
-            <td className="col-2">
-              <PropertyValues inputKey={inputKey} values={key.values} />
-            </td>
-            <td className="col-5">
-              <RenderCheckBox
-                type={type}
-                property={key.property}
-                value={key.control.value}
-                default={key.control.default}
-              />
-            </td>
-            <td className="col-2">{key.description}</td>
-          </tr>
-        );
-      }
-
-      return result;
-    });
-  } catch (e) {
-    /*eslint-disable */
-    console.log(e);
-    /* eslint-enable */
-  }
-
-  return htmlElements;
-}
-
-function SoftwareProperties(props) {
-  const { properties } = props;
-  let fullProperties = null;
-
-  fullProperties =
-    props.software === 'Client' ? properties.Client : properties.Designer;
-
-  return renderTableCols(fullProperties, props.software);
-}
-
-function RTAMProperties(props) {
-  return renderTableCols(props.properties, 'RTAM');
-}
-
-function ITIProperties(props) {
-  return renderTableCols(props.properties, 'ITI');
-}
-
 function PropertyValues(props) {
   const propertyValues = props.values.map(value => (
     <div key={`${props.inputKey}_propValue_${value}`}>{value}</div>
@@ -735,7 +872,7 @@ function PropertyValues(props) {
 
 function RenderOptions(props) {
   const options = props.options.map(value => (
-    <option key={`${props.inputKey}_option_${value}`} value={Object.values(value)[0]}>
+    <option key={`${props.inputKey}_option_${Object.values(value)[0]}`} value={Object.values(value)[0]}>
       {Object.keys(value)[0]}
     </option>
   ));
