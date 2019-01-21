@@ -8,12 +8,21 @@ It allows you to choose the properties, specify their values, generate the scrip
 
 The tool is built using REACT JS 16.x and packaged with WebPack 4.x. 
 
+ - Install all dependencies by executing: npm install.
  - To run the dev server execute: npm start.
  - To generate production build: npm run build.
  - For commits and pull requests make sure that there are no errors on the syntax by running npm run lint, a precommit hook is enabled and you won't be allowed to do commits if the linter finds errors in the syntax or code style.
  - To automatically fix code style errors run: npm run lint -- --fix.
 
 ## Change log
+v1.4.0
+- Added properties search filter
+- Added APA 7.0 support.
+  Propertes added: AF_ENABLE, AF_HASHING, AF_SENSITIVEAPPS, ICON.
+  Propertes removed: none.
+v1.3.3
+- Added Uninstall option
+
 v1.3.2
  - Added show/hide sticky buttons to client, iti and rtam properties
 

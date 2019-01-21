@@ -34,7 +34,7 @@ class App extends React.Component {
     }
     return (
       <Properties
-        version="6.7"
+        version={this.state.batchProperties.version}
         software={this.state.batchProperties.software}
         include_iti={this.state.batchProperties.include_iti}
         include_rtam={this.state.batchProperties.include_rtam}

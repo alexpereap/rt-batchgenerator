@@ -64,5 +64,17 @@
     "RTAM": [
       "NICE RTAM Upgrade R6.7.0.msi"
     ]
+  },
+  "7.0":{
+    "ITI": [
+      "NICE Insight to Impact Bridge for NES6.5.msi",
+      "NICE Insight to Impact Bridge for NES6.6.msi",
+      "NICE Insight to Impact Bridge for NEP6.3.msi",
+      "NICE Insight to Impact Bridge for NEP6.4.msi",
+      "NICE Insight to Impact Bridge for NES6.7.msi"
+    ],
+    "RTAM": [
+      "NICE RTAM Upgrade R7.0.0.msi"
+    ]
   }
 }
