@@ -443,7 +443,7 @@ class Properties extends React.Component {
               className="d-flex"
               ref={(node) => {
                 if (node && key.visible === true) {
-                  node.style.setProperty('display', 'inherit');
+                  node.style.removeProperty('display');
                 } else if (node && key.visible === false) {
                   node.style.setProperty('display', 'none', 'important');
                 }
@@ -474,7 +474,7 @@ class Properties extends React.Component {
               className="d-flex"
               ref={(node) => {
                 if (node && key.visible === true) {
-                  node.style.setProperty('display', 'inherit');
+                  node.style.removeProperty('display');
                 } else if (node && key.visible === false) {
                   node.style.setProperty('display', 'none', 'important');
                 }
@@ -505,7 +505,7 @@ class Properties extends React.Component {
               className="d-flex"
               ref={(node) => {
                 if (node && key.visible === true) {
-                  node.style.setProperty('display', 'inherit');
+                  node.style.removeProperty('display');
                 } else if (node && key.visible === false) {
                   node.style.setProperty('display', 'none', 'important');
                 }
