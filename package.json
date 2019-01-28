@@ -1,6 +1,6 @@
 {
   "name": "react-rt-client-batch-generator",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Real Time Client silent install batch generator tool",
   "main": "index.js",
   "scripts": {
